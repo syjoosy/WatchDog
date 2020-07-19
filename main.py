@@ -38,7 +38,6 @@ class Handler(FileSystemEventHandler):
 				new_path = folder_dest + "/PyDoc/" + filename
 				os.rename(file, new_path)
 
-
 # Папка что отслеживается
 folder_track = '/home/syjoosy/Загрузки'
 # Папка куда перемещать будем
