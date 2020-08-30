@@ -110,6 +110,35 @@ class Handler(FileSystemEventHandler):
 	# 	print(f.read())
 	# 	f.close()
 
+def read():
+	# with open('settings.txt') as f:
+	# 	lines = f.readlines()
+	# 	 print(lines[0:-2])
+	# 	print(lines[:-2])
+	# определим имя файла, который читаем
+	filename = "settings.txt"
+
+	# открываем файл для чтения
+	filehandle = open(filename, 'r')
+	while True:
+		# читаем одну строку
+		line = filehandle.readline()
+		if not line:
+			break
+		print(line[:-1])
+
+	# закрываем указатель на этот файл
+	filehandle.close()
+
+
+def write():
+	with open(r"settings.txt", "w") as file:
+		for line in arr:
+			file.write(line + '\n')
+
+
+
+read()
 # Папка что отслеживается
 folder_track = '/home/syjoosy/Загрузки'
 # Папка куда перемещать будем
@@ -120,6 +149,7 @@ handle = Handler()
 observer = Observer()
 observer.schedule(handle, folder_track, recursive=True)
 observer.start()
+# print("\n")
 print("Старт...")
 # window.mainloop()
 # Программа будет срабатывать каждые 10 милисекунд

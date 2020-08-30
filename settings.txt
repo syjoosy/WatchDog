@@ -1,0 +1,15 @@
+jpg
+png
+svg
+jpeg
+mp4
+mkv
+zip
+rar
+deb
+doc
+docx
+pdf
+odt
+txt
+py
