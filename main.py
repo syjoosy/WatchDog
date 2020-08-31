@@ -111,34 +111,36 @@ class Handler(FileSystemEventHandler):
 	# 	f.close()
 
 def read():
-	# with open('settings.txt') as f:
-	# 	lines = f.readlines()
-	# 	 print(lines[0:-2])
-	# 	print(lines[:-2])
-	# определим имя файла, который читаем
-	filename = "settings.txt"
-
-	# открываем файл для чтения
-	filehandle = open(filename, 'r')
-	while True:
-		# читаем одну строку
-		line = filehandle.readline()
-		if not line:
-			break
-		print(line[:-1])
-
-	# закрываем указатель на этот файл
-	filehandle.close()
+	try:
+		filename = "settings.txt"
+		filehandle = open(filename, 'r')
+		i = 0
+		while True:
+			line = filehandle.readline()
+			if not line:
+				break
+			i += 1
+		filehandle.close()
+		print("Весь файл успешно прочтен, {} расширений".format(i))
+	except BaseException:
+		print("Ошибка чтения файла")
 
 
 def write():
-	with open(r"settings.txt", "w") as file:
-		for line in arr:
-			file.write(line + '\n')
+	i = 0
+	try:
+		with open(r"settings.txt", "w") as file:
+			for line in arr:
+				file.write(line + '\n')
+				i += 1
+		print("Запись прошла успешно, добавлено {} расширений".format(i))
+	except BaseException:
+		print("Ошибка записи файла")
 
 
 
 read()
+write()
 # Папка что отслеживается
 folder_track = '/home/syjoosy/Загрузки'
 # Папка куда перемещать будем
