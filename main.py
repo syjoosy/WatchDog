@@ -32,6 +32,7 @@ def read(filename="settings.txt"):
 			if not line:
 				break
 			i += 1
+
 		filehandle.close()
 		print("Весь файл успешно прочтен, {} расширений".format(i))
 	except BaseException:
@@ -39,20 +40,21 @@ def read(filename="settings.txt"):
 
 
 
-def write(filename="settings.txt"):
-	i = 0
-	try:
-		with open(filename, "w") as file:
-			for line in arr:
-				file.write(line + '\n')
-				i += 1
+# def write(filename="settings.txt"):
+# 	i = 0
+# 	try:
+# 		with open(filename, "w") as file:
+# 			for line in arr:
+# 				file.write(line + '\n')
+# 				i += 1
+#
+# 		print("Запись прошла успешно, добавлено {} расширений".format(i))
+# 	except BaseException:
+# 		print("Ошибка записи файла")
 
-		print("Запись прошла успешно, добавлено {} расширений".format(i))
-	except BaseException:
-		print("Ошибка записи файла")
-
-def new(filename="settings.txt"):
+def new():
 	try:
+		result = txt1.get()
 		txt.config(highlightbackground="black", highlightcolor="black")
 		res = txt.get()
 		# txt.delete(1.0, END)
@@ -61,28 +63,39 @@ def new(filename="settings.txt"):
 		# arr.append(expansion)
 		arr.append(res)
 		lbox.insert(END, res)
-		with open(filename, "a") as myfile:
+		with open(result, "a") as myfile:
 			myfile.write("\n"+res)
+		txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		txt.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		print("Расширение успешно добавлено")
 	except BaseException:
 		txt.config(highlightbackground="red", highlightcolor="red")
 		print("Ошибка, массив расширений не найден")
 
-def newtype():
-	# name = input("Введите название категории: ")
-	res = txt1.get()
-	# txt1.delete(1.0, END)
-	myFile = open(res, "w")
-	txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
-	write(res)
-	read(res)
-	myFile.close()
+# def newtype():
+# 	# name = input("Введите название категории: ")
+# 	res = txt1.get()
+# 	# txt1.delete(1.0, END)
+# 	myFile = open(res, "a")
+# 	txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
+# 	write(res)
+# 	read(res)
+# 	myFile.close()
 
 def extension():
+	global kolvo
+	for filename in os.listdir(folder_track):
+		# Проверяем расширенеи файла
+		extension = filename.split(".")
+	# Если это фото,
 	try:
-		# read("photo.txt")
-		pass
+		if len(extension) > 1 and (extension[1].lower() == arr[4] or extension[1].lower() == arr[5]):
+			file = folder_track + "/" + filename
+			folder_dest = '/home/syjoosy/Видео/'
+			new_path = folder_dest + filename
+			os.rename(file, new_path)
+			kolvo = kolvo + 1
+
 	except BaseException:
 		pass
 
@@ -100,8 +113,8 @@ lbl.place(x=10, y=240)
 txt1 = Entry(window, width=10)
 txt1.place(x=280, y=245)
 
-btn = Button(window, text="Добавить", command=newtype)
-btn.place(x=380, y=240)
+# btn = Button(window, text="Добавить", command=newtype)
+# btn.place(x=380, y=240)
 
 lbl = Label(window, text="Добавить расширение:", font=("Arial Bold", 16))
 lbl.place(x=10, y=280)
