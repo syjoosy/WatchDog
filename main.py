@@ -32,6 +32,7 @@ def read(filename="settings.txt"):
 			if not line:
 				break
 			i += 1
+			# file = open(line, 'r')
 
 		filehandle.close()
 		print("Весь файл успешно прочтен, {} расширений".format(i))
@@ -84,11 +85,16 @@ def new():
 
 def extension():
 	global kolvo
+	# filename = "photo.txt"
+	fele = "photo.txt"
+	myFile = open(fele, 'r')
+	arr = []
+	for line in myFile:
+		arr.append(line)
 	for filename in os.listdir(folder_track):
 		# Проверяем расширенеи файла
 		extension = filename.split(".")
 	# Если это фото,
-	try:
 		if len(extension) > 1 and (extension[1].lower() == arr[4] or extension[1].lower() == arr[5]):
 			file = folder_track + "/" + filename
 			folder_dest = '/home/syjoosy/Видео/'
@@ -96,8 +102,6 @@ def extension():
 			os.rename(file, new_path)
 			kolvo = kolvo + 1
 
-	except BaseException:
-		pass
 
 
 
