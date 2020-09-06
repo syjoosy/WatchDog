@@ -23,9 +23,9 @@ arr = []
 # 	lbox.insert(END, txt.get())
 # 	txt.delete(0, END)
 
-def read(filename="settings.txt"):
+def read():
 	try:
-		# filename = "settings.txt"
+		filename = "settings.txt"
 		filehandle = open(filename, 'r')
 		i = 0
 		while True:
@@ -33,10 +33,11 @@ def read(filename="settings.txt"):
 			if not line:
 				break
 			i += 1
+			extension(line)
 			# file = open(line, 'r')
 
 		filehandle.close()
-		print("Весь файл успешно прочтен, {} расширений".format(i))
+		print("Весь файл успешно прочтен, {} файлов".format(i))
 	except BaseException:
 		print("Ошибка чтения файла")
 
@@ -84,57 +85,57 @@ def new():
 # 	read(res)
 # 	myFile.close()
 
-def extension():
+def extension(line):
 	global kolvo
 	# filename = "photo.txt"
-	fele = "photo.txt"
-	myFile = open(fele, 'r')
+	# fele = "photo.txt"
+	myFile = open(line, 'r')
 	arr = []
-	for line in myFile:
-		arr.append(line)
+	#for line in myFile:
+	arr.append(myFile)
 	for filename in os.listdir(folder_track):
 		# Проверяем расширенеи файла
 		extension = filename.split(".")
 	# Если это фото,
 		for i in arr:
-		if len(extension) > 1 and (extension[1].lower() == i):
-			file = folder_track + "/" + filename
-			folder_dest = '/home/syjoosy/Видео/'
-			new_path = folder_dest + filename
-			os.rename(file, new_path)
-			kolvo = kolvo + 1
-		# Если файл видео, то в папку с видео
-			# Такое же можно прописать и для других расширений файлов
-			#if len(extension) > 1 and (extension[1].lower() == arr[4] or extension[1].lower() == arr[5]):
-			#	file = folder_track + "/" + filename
-			#	folder_dest = '/home/syjoosy/Видео/'
-			#	new_path = folder_dest + filename
-			#	os.rename(file, new_path)
-			#	kolvo = kolvo + 1
-			#if len(extension) > 1 and (extension[1].lower() == arr[6] or extension[1].lower() == arr[7]):
-			#	file = folder_track + "/" + filename
-			#	folder_dest = '/home/syjoosy/Загрузки'
-			#	new_path = folder_dest + "/Zip_Rar/" + filename
-			#	os.rename(file, new_path)
-			#	kolvo = kolvo + 1
-			#if len(extension) > 1 and extension[1].lower() == arr[8]:
-			#	file = folder_track + "/" + filename
-			#	folder_dest = '/home/syjoosy/Загрузки'
-			#	new_path = folder_dest + "/Deb/" + filename
-			#	os.rename(file, new_path)
-			#	kolvo = kolvo + 1
-			#if len(extension) > 1 and (extension[1].lower() == arr[9] or extension[1].lower() == arr[10] or extension[1].lower() == arr[11] or extension[1].lower() == arr[12] or extension[1].lower() == arr[13]):
-			#	file = folder_track + "/" + filename
-			#	folder_dest = '/home/syjoosy/Документы/'
-			#	new_path = folder_dest + filename
-			#	os.rename(file, new_path)
-			#	kolvo = kolvo + 1
-			#elif len(extension) > 1 and extension[1].lower() == arr[14]:
-			#	file = folder_track + "/" + filename
-			#	folder_dest = '/home/syjoosy/Загрузки'
-			#	new_path = folder_dest + "/PyDoc/" + filename
-			#	os.rename(file, new_path)
-			#	kolvo = kolvo + 1
+			if len(extension) > 1 and (extension[1].lower() == i):
+				file = folder_track + "/" + filename
+				folder_dest = '/home/syjoosy/Видео/'
+				new_path = folder_dest + filename
+				os.rename(file, new_path)
+				kolvo = kolvo + 1
+			# Если файл видео, то в папку с видео
+				# Такое же можно прописать и для других расширений файлов
+				#if len(extension) > 1 and (extension[1].lower() == arr[4] or extension[1].lower() == arr[5]):
+				#	file = folder_track + "/" + filename
+				#	folder_dest = '/home/syjoosy/Видео/'
+				#	new_path = folder_dest + filename
+				#	os.rename(file, new_path)
+				#	kolvo = kolvo + 1
+				#if len(extension) > 1 and (extension[1].lower() == arr[6] or extension[1].lower() == arr[7]):
+				#	file = folder_track + "/" + filename
+				#	folder_dest = '/home/syjoosy/Загрузки'
+				#	new_path = folder_dest + "/Zip_Rar/" + filename
+				#	os.rename(file, new_path)
+				#	kolvo = kolvo + 1
+				#if len(extension) > 1 and extension[1].lower() == arr[8]:
+				#	file = folder_track + "/" + filename
+				#	folder_dest = '/home/syjoosy/Загрузки'
+				#	new_path = folder_dest + "/Deb/" + filename
+				#	os.rename(file, new_path)
+				#	kolvo = kolvo + 1
+				#if len(extension) > 1 and (extension[1].lower() == arr[9] or extension[1].lower() == arr[10] or extension[1].lower() == arr[11] or extension[1].lower() == arr[12] or extension[1].lower() == arr[13]):
+				#	file = folder_track + "/" + filename
+				#	folder_dest = '/home/syjoosy/Документы/'
+				#	new_path = folder_dest + filename
+				#	os.rename(file, new_path)
+				#	kolvo = kolvo + 1
+				#elif len(extension) > 1 and extension[1].lower() == arr[14]:
+				#	file = folder_track + "/" + filename
+				#	folder_dest = '/home/syjoosy/Загрузки'
+				#	new_path = folder_dest + "/PyDoc/" + filename
+				#	os.rename(file, new_path)
+				#	kolvo = kolvo + 1
 
 
 
@@ -239,6 +240,7 @@ class Handler(FileSystemEventHandler):
 # read()
 # write()
 # newtype()
+extension()
 # Папка что отслеживается
 folder_track = '/home/syjoosy/Загрузки'
 # Папка куда перемещать будем
