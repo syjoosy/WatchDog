@@ -10,12 +10,16 @@ from tkinter import *
 window = Tk()
 window.title("WatchDog by syjoosy")
 window.geometry('800x800')
-lbl = Label(window, text="Список всех фильтруемых расширений:", font=("Arial Bold", 16))
-lbl.grid(column=0, row=0)
 
+
+# Папка что отслеживается
+folder_track = '/home/syjoosy/Загрузки'
+# Папка куда перемещать будем
+folder_dest = '/home/syjoosy/Загрузки'
 
 
 #arr = ["jpg", "png", "svg", "jpeg", "mp4", "mkv", "zip", "rar", "deb", "doc", "docx", "pdf", "odt", "txt", "py"]
+settings_line = []
 arr = []
 
 # def append():
@@ -23,23 +27,23 @@ arr = []
 # 	lbox.insert(END, txt.get())
 # 	txt.delete(0, END)
 
-def read():
-	try:
-		filename = "settings.txt"
-		filehandle = open(filename, 'r')
-		i = 0
-		while True:
-			line = filehandle.readline()
-			if not line:
-				break
-			i += 1
-			extension(line)
-			# file = open(line, 'r')
-
-		filehandle.close()
-		print("Весь файл успешно прочтен, {} файлов".format(i))
-	except BaseException:
-		print("Ошибка чтения файла")
+# def read():
+# 	try:
+# 		filename = "settings.txt"
+# 		filehandle = open(filename, 'r')
+# 		i = 0
+# 		while True:
+# 			line = filehandle.readline()
+# 			if not line:
+# 				break
+# 			i += 1
+# 			settings_line.append(line)
+# 			extension(line)
+# 			# file = open(line, 'r')
+# 		filehandle.close()
+# 		print("Весь файл успешно прочтен, строк: {}".format(i))
+# 	except BaseException:
+# 		print("Ошибка чтения файла")
 
 
 
@@ -54,6 +58,8 @@ def read():
 # 		print("Запись прошла успешно, добавлено {} расширений".format(i))
 # 	except BaseException:
 # 		print("Ошибка записи файла")
+
+# read()
 
 def new():
 	try:
@@ -86,13 +92,16 @@ def new():
 # 	myFile.close()
 
 def extension(line):
+	print("Функция extension запустилась")
 	global kolvo
+	line = line[0:-1]
 	# filename = "photo.txt"
 	# fele = "photo.txt"
 	myFile = open(line, 'r')
-	arr = []
 	#for line in myFile:
 	arr.append(myFile)
+	print("Строка добавлена")
+	print(arr)
 	for filename in os.listdir(folder_track):
 		# Проверяем расширенеи файла
 		extension = filename.split(".")
@@ -100,46 +109,40 @@ def extension(line):
 		for i in arr:
 			if len(extension) > 1 and (extension[1].lower() == i):
 				file = folder_track + "/" + filename
-				folder_dest = '/home/syjoosy/Видео/'
+				folder_dest = '/home/syjoosy/Изображения/'
 				new_path = folder_dest + filename
 				os.rename(file, new_path)
 				kolvo = kolvo + 1
-			# Если файл видео, то в папку с видео
-				# Такое же можно прописать и для других расширений файлов
-				#if len(extension) > 1 and (extension[1].lower() == arr[4] or extension[1].lower() == arr[5]):
-				#	file = folder_track + "/" + filename
-				#	folder_dest = '/home/syjoosy/Видео/'
-				#	new_path = folder_dest + filename
-				#	os.rename(file, new_path)
-				#	kolvo = kolvo + 1
-				#if len(extension) > 1 and (extension[1].lower() == arr[6] or extension[1].lower() == arr[7]):
-				#	file = folder_track + "/" + filename
-				#	folder_dest = '/home/syjoosy/Загрузки'
-				#	new_path = folder_dest + "/Zip_Rar/" + filename
-				#	os.rename(file, new_path)
-				#	kolvo = kolvo + 1
-				#if len(extension) > 1 and extension[1].lower() == arr[8]:
-				#	file = folder_track + "/" + filename
-				#	folder_dest = '/home/syjoosy/Загрузки'
-				#	new_path = folder_dest + "/Deb/" + filename
-				#	os.rename(file, new_path)
-				#	kolvo = kolvo + 1
-				#if len(extension) > 1 and (extension[1].lower() == arr[9] or extension[1].lower() == arr[10] or extension[1].lower() == arr[11] or extension[1].lower() == arr[12] or extension[1].lower() == arr[13]):
-				#	file = folder_track + "/" + filename
-				#	folder_dest = '/home/syjoosy/Документы/'
-				#	new_path = folder_dest + filename
-				#	os.rename(file, new_path)
-				#	kolvo = kolvo + 1
-				#elif len(extension) > 1 and extension[1].lower() == arr[14]:
-				#	file = folder_track + "/" + filename
-				#	folder_dest = '/home/syjoosy/Загрузки'
-				#	new_path = folder_dest + "/PyDoc/" + filename
-				#	os.rename(file, new_path)
-				#	kolvo = kolvo + 1
 
 
 
+# lbl = Label(window, text="Список всех доступных файлов:", font=("Arial Bold", 16))
+# lbl.place(x=280, y=0)
 
+
+filename = "settings.txt"
+filehandle = open(filename, 'r')
+i = 0
+while True:
+	line = filehandle.readline()
+	if not line:
+		break
+	i += 1
+	settings_line.append(line)
+	extension(line)
+	# file = open(line, 'r')
+filehandle.close()
+print("Весь файл успешно прочтен, строк: {}".format(i))
+
+
+lbox1 = Listbox()
+print(settings_line)
+for i in settings_line:
+	lbox1.insert(END,i)
+lbox1.place(x=200, y=40)
+
+lbl = Label(window, text="Список всех фильтруемых расширений:", font=("Arial Bold", 16))
+lbl.grid(column=0, row=0)
 
 lbox = Listbox()
 for i in arr:
@@ -240,7 +243,7 @@ class Handler(FileSystemEventHandler):
 # read()
 # write()
 # newtype()
-extension()
+# extension()
 # Папка что отслеживается
 folder_track = '/home/syjoosy/Загрузки'
 # Папка куда перемещать будем
