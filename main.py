@@ -74,6 +74,9 @@ def new():
 		lbox.insert(END, res)
 		with open(result, "a") as myfile:
 			myfile.write("\n"+res)
+		settings_file = open("settings.txt", 'a')
+		settings_file.write(result + "\n")
+
 		txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		txt.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		print("Расширение успешно добавлено")
@@ -94,14 +97,17 @@ def new():
 def extension(line):
 	print("Функция extension запустилась")
 	global kolvo
-	line = line[0:-1]
+	#print("line: ", line)
+	# line_fix_n = line[0:-1]
+	#print("line: ", line_fix_n)
 	# filename = "photo.txt"
 	# fele = "photo.txt"
 	myFile = open(line, 'r')
-	#for line in myFile:
-	arr.append(myFile)
-	print("Строка добавлена")
-	print(arr)
+	for line_file in myFile:
+		line_file = line_file[0:-1]
+		arr.append(line_file)
+		#print("Строка ", line_file, " добавлена")
+	#print(arr)
 	for filename in os.listdir(folder_track):
 		# Проверяем расширенеи файла
 		extension = filename.split(".")
@@ -122,9 +128,14 @@ def extension(line):
 
 filename = "settings.txt"
 filehandle = open(filename, 'r')
+# file1 = open("photo", 'r')
+# for a in file1:
+# 	print(a)
 i = 0
+kolvo = 0
 while True:
 	line = filehandle.readline()
+	line = line[0:-1]
 	if not line:
 		break
 	i += 1
@@ -258,8 +269,15 @@ observer.start()
 print("Старт...")
 window.mainloop()
 # Программа 	будет срабатывать каждые 10 милисекунд
+lbox_restart = "lbox_restart"
 try:
+	print("Запуск try")
 	while(True):
+		print("Выполнилось")
+		lbox1.insert(END, lbox_restart)
+		# lbox1.delete(lbox_restart)
+		# lbox.insert(END, lbox_restart)
+		# lbox.delete(lbox_restart)
 		time.sleep(10)
 except KeyboardInterrupt:
 	observer.stop()
