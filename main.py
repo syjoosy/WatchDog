@@ -4,8 +4,6 @@ import time
 # FileSystemEventHandler - класс по отслеживанию изменений
 from watchdog.events import FileSystemEventHandler
 from tkinter import *
-# from tkinter import filedialog as fd
-
 
 window = Tk()
 window.title("WatchDog by syjoosy")
@@ -21,11 +19,6 @@ folder_dest = '/home/syjoosy/Загрузки'
 #arr = ["jpg", "png", "svg", "jpeg", "mp4", "mkv", "zip", "rar", "deb", "doc", "docx", "pdf", "odt", "txt", "py"]
 settings_line = []
 arr = []
-
-# def append():
-# 	arr.append(txt.get())
-# 	lbox.insert(END, txt.get())
-# 	txt.delete(0, END)
 
 # def read():
 # 	try:
@@ -76,6 +69,7 @@ def new():
 			myfile.write("\n"+res)
 		settings_file = open("settings.txt", 'a')
 		settings_file.write(result + "\n")
+		settings_line.append(result)
 
 		txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		txt.config(highlightbackground="lawn green", highlightcolor="lawn green")
@@ -122,15 +116,9 @@ def extension(line):
 
 
 
-# lbl = Label(window, text="Список всех доступных файлов:", font=("Arial Bold", 16))
-# lbl.place(x=280, y=0)
-
-
 filename = "settings.txt"
 filehandle = open(filename, 'r')
-# file1 = open("photo", 'r')
-# for a in file1:
-# 	print(a)
+
 i = 0
 kolvo = 0
 while True:
@@ -141,7 +129,6 @@ while True:
 	i += 1
 	settings_line.append(line)
 	extension(line)
-	# file = open(line, 'r')
 filehandle.close()
 print("Весь файл успешно прочтен, строк: {}".format(i))
 
@@ -174,8 +161,6 @@ lbl.place(x=10, y=280)
 
 txt = Entry(window, width=10)
 txt.place(x=280, y=285)
-
-# txt.pack()
 
 btn = Button(window, text="Добавить", command=new)
 btn.place(x=380, y=280)
@@ -243,11 +228,7 @@ class Handler(FileSystemEventHandler):
 				os.rename(file, new_path)
 				kolvo = kolvo + 1
 		print("Перемещенно объектов: ", kolvo)
-	# def read(self):
-	# 	print("FUNCTION")
-	# 	f = open('settings.txt')
-	# 	print(f.read())
-	# 	f.close()
+
 
 
 # new()
