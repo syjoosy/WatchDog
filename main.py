@@ -71,6 +71,17 @@ def new():
 		settings_file.write(result + "\n")
 		settings_line.append(result)
 
+		lbox.delete(0, 'end')
+		lbox1.delete(0, 'end')
+
+		for i in arr:
+			lbox.insert(END, i)
+		lbox.place(x=10, y=40)
+
+		for i in settings_line:
+			lbox1.insert(END, i)
+		lbox1.place(x=200, y=40)
+
 		txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		txt.config(highlightbackground="lawn green", highlightcolor="lawn green")
 		print("Расширение успешно добавлено")
@@ -96,23 +107,26 @@ def extension(line):
 	#print("line: ", line_fix_n)
 	# filename = "photo.txt"
 	# fele = "photo.txt"
-	myFile = open(line, 'r')
-	for line_file in myFile:
-		line_file = line_file[0:-1]
-		arr.append(line_file)
-		#print("Строка ", line_file, " добавлена")
-	#print(arr)
-	for filename in os.listdir(folder_track):
-		# Проверяем расширенеи файла
-		extension = filename.split(".")
-	# Если это фото,
-		for i in arr:
-			if len(extension) > 1 and (extension[1].lower() == i):
-				file = folder_track + "/" + filename
-				folder_dest = '/home/syjoosy/Изображения/'
-				new_path = folder_dest + filename
-				os.rename(file, new_path)
-				kolvo = kolvo + 1
+	try:
+		myFile = open(line, 'a')
+		for line_file in myFile:
+			line_file = line_file[0:-1]
+			arr.append(line_file)
+			print("Строка ", line_file, " добавлена")
+			print(arr)
+	except BaseException:
+		print("Ошибка чтения файлов расширений")
+	# for filename in os.listdir(folder_track):
+	# 	# Проверяем расширенеи файла
+	# 	extension = filename.split(".")
+	# # Если это фото,
+	# 	for i in arr:
+	# 		if len(extension) > 1 and (extension[1].lower() == i):
+	# 			file = folder_track + "/" + filename
+	# 			folder_dest = '/home/syjoosy/Изображения/'
+	# 			new_path = folder_dest + filename
+	# 			os.rename(file, new_path)
+	# 			kolvo = kolvo + 1
 
 
 
@@ -121,11 +135,16 @@ filehandle = open(filename, 'r')
 
 i = 0
 kolvo = 0
+lbox_restart = 123
 while True:
 	line = filehandle.readline()
 	line = line[0:-1]
 	if not line:
 		break
+	# lbox1.insert(END, lbox_restart)
+	# lbox1.delete(lbox_restart)
+	# lbox.insert(END, lbox_restart)
+	# lbox.delete(lbox_restart)
 	i += 1
 	settings_line.append(line)
 	extension(line)
