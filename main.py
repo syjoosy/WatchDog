@@ -67,9 +67,19 @@ def new():
 		lbox.insert(END, res)
 		with open(result, "a") as myfile:
 			myfile.write("\n"+res)
-		settings_file = open("settings.txt", 'a')
-		settings_file.write(result + "\n")
-		settings_line.append(result)
+
+		settings_file = open("settings.txt", 'r')
+		find = 0
+		# print("result: ", result)
+		for line in settings_file:
+			if line == result + "\n":
+				# print("Такая строка уже найдена")
+				find = 1
+				pass
+		if find == 0:
+			settings_file = open("settings.txt", 'a')
+			settings_file.write(result + "\n")
+			settings_line.append(result)
 
 		lbox.delete(0, 'end')
 		lbox1.delete(0, 'end')
@@ -99,8 +109,17 @@ def new():
 # 	read(res)
 # 	myFile.close()
 
+		# 'r'	открытие на чтение (является значением по умолчанию).
+		# 'w'	открытие на запись, содержимое файла удаляется, если файла не существует, создается новый.
+		# 'x'	открытие на запись, если файла не существует, иначе исключение.
+		# 'a'	открытие на дозапись, информация добавляется в конец файла.
+		# 'b'	открытие в двоичном режиме.
+		# 't'	открытие в текстовом режиме (является значением по умолчанию).
+		# '+'	открытие на чтение и записьь
+
+
 def extension(line):
-	print("Функция extension запустилась")
+	# print("Функция extension запустилась")
 	global kolvo
 	#print("line: ", line)
 	# line_fix_n = line[0:-1]
@@ -108,12 +127,15 @@ def extension(line):
 	# filename = "photo.txt"
 	# fele = "photo.txt"
 	try:
-		myFile = open(line, 'a')
+		# print("1")
+		myFile = open(line, 'r')
+		# print("2")
 		for line_file in myFile:
+			# print("3")
 			line_file = line_file[0:-1]
 			arr.append(line_file)
 			print("Строка ", line_file, " добавлена")
-			print(arr)
+			# print(arr)
 	except BaseException:
 		print("Ошибка чтения файлов расширений")
 	# for filename in os.listdir(folder_track):
@@ -270,6 +292,7 @@ print("Старт...")
 window.mainloop()
 # Программа 	будет срабатывать каждые 10 милисекунд
 lbox_restart = "lbox_restart"
+
 try:
 	print("Запуск try")
 	while(True):
