@@ -78,7 +78,7 @@ def new():
 				pass
 		if find == 0:
 			settings_file = open("settings.txt", 'a')
-			settings_file.write(result + "\n")
+			settings_file.write(result)
 			settings_line.append(result)
 
 		lbox.delete(0, 'end')
@@ -130,9 +130,14 @@ def extension(line):
 		# print("1")
 		myFile = open(line, 'r')
 		# print("2")
+		# dlina = len(myFile)
+		i = 0
 		for line_file in myFile:
 			# print("3")
+			# i+=1
+			# if i != dlina:
 			line_file = line_file[0:-1]
+			# arr.append(line_file)
 			arr.append(line_file)
 			print("Строка ", line_file, " добавлена")
 			# print(arr)
@@ -175,7 +180,7 @@ print("Весь файл успешно прочтен, строк: {}".format(i
 
 
 lbox1 = Listbox()
-print(settings_line)
+# print(settings_line)
 for i in settings_line:
 	lbox1.insert(END,i)
 lbox1.place(x=200, y=40)
