@@ -99,6 +99,18 @@ def new():
 		txt.config(highlightbackground="red", highlightcolor="red")
 		print("Ошибка, массив расширений не найден")
 
+def remove():
+	name = txt1.get()
+	extension = txt.get()
+	file = open(name)
+	for line in file:
+		if line == extension:
+			pass
+	file.close
+
+def remove_all():
+	pass
+
 # def newtype():
 # 	# name = input("Введите название категории: ")
 # 	res = txt1.get()
@@ -108,6 +120,18 @@ def new():
 # 	write(res)
 # 	read(res)
 # 	myFile.close()
+
+def newtype():
+	# name = input("Введите название категории: ")
+	res = txt1.get()
+	# txt1.delete(1.0, END)
+	myFile = open(res, "a")
+	txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
+	# write(res)
+	# read(res)
+	myFile.close()
+
+
 
 		# 'r'	открытие на чтение (является значением по умолчанию).
 		# 'w'	открытие на запись, содержимое файла удаляется, если файла не существует, создается новый.
@@ -154,6 +178,54 @@ def extension(line):
 	# 			new_path = folder_dest + filename
 	# 			os.rename(file, new_path)
 	# 			kolvo = kolvo + 1
+	# for filename in os.listdir(folder_track):
+	# 	# Проверяем расширенеи файла
+	# 	extension = filename.split(".")
+	# 	# Если это фото,
+	# 	if len(extension) > 1 and (
+	# 			extension[1].lower() == arr[0] or extension[1].lower() == arr[1] or extension[1].lower() == arr[2] or
+	# 			extension[1].lower() == arr[3]):
+	# 		# то перемещаем файл в папку с фото
+	# 		file = folder_track + "/" + filename
+	# 		folder_dest = '/home/syjoosy/Изображения/'
+	# 		new_path = folder_dest + filename
+	# 		os.rename(file, new_path)
+	# 		kolvo = kolvo + 1
+	# 	# Если файл видео, то в папку с видео
+	# 	# Такое же можно прописать и для других расширений файлов
+	# 	if len(extension) > 1 and (extension[1].lower() == arr[4] or extension[1].lower() == arr[5]):
+	# 		file = folder_track + "/" + filename
+	# 		folder_dest = '/home/syjoosy/Видео/'
+	# 		new_path = folder_dest + filename
+	# 		os.rename(file, new_path)
+	# 		kolvo = kolvo + 1
+	# 	if len(extension) > 1 and (extension[1].lower() == arr[6] or extension[1].lower() == arr[7]):
+	# 		file = folder_track + "/" + filename
+	# 		folder_dest = '/home/syjoosy/Загрузки'
+	# 		new_path = folder_dest + "/Zip_Rar/" + filename
+	# 		os.rename(file, new_path)
+	# 		kolvo = kolvo + 1
+	# 	if len(extension) > 1 and extension[1].lower() == arr[8]:
+	# 		file = folder_track + "/" + filename
+	# 		folder_dest = '/home/syjoosy/Загрузки'
+	# 		new_path = folder_dest + "/Deb/" + filename
+	# 		os.rename(file, new_path)
+	# 		kolvo = kolvo + 1
+	# 	if len(extension) > 1 and (
+	# 			extension[1].lower() == arr[9] or extension[1].lower() == arr[10] or extension[1].lower() == arr[11] or
+	# 			extension[1].lower() == arr[12] or extension[1].lower() == arr[13]):
+	# 		file = folder_track + "/" + filename
+	# 		folder_dest = '/home/syjoosy/Документы/'
+	# 		new_path = folder_dest + filename
+	# 		os.rename(file, new_path)
+	# 		kolvo = kolvo + 1
+	# 	elif len(extension) > 1 and extension[1].lower() == arr[14]:
+	# 		file = folder_track + "/" + filename
+	# 		folder_dest = '/home/syjoosy/Загрузки'
+	# 		new_path = folder_dest + "/PyDoc/" + filename
+	# 		os.rename(file, new_path)
+	# 		kolvo = kolvo + 1
+	# print("Перемещенно объектов: ", kolvo)
 
 
 
@@ -199,8 +271,8 @@ lbl.place(x=10, y=240)
 txt1 = Entry(window, width=10)
 txt1.place(x=280, y=245)
 
-# btn = Button(window, text="Добавить", command=newtype)
-# btn.place(x=380, y=240)
+btn = Button(window, text="Удалить все расширения", command=remove_all)
+btn.place(x=380, y=240)
 
 lbl = Label(window, text="Добавить расширение:", font=("Arial Bold", 16))
 lbl.place(x=10, y=280)
@@ -210,6 +282,12 @@ txt.place(x=280, y=285)
 
 btn = Button(window, text="Добавить", command=new)
 btn.place(x=380, y=280)
+
+# btn = Button(window, text="Добавить", command=new)
+# btn.place(x=380, y=280)
+
+btn = Button(window, text="Удалить", command=remove)
+btn.place(x=490, y=280)
 
 lbl = Label(window, text="Куда сортировать:", font=("Arial Bold", 16))
 lbl.place(x=10, y=320)
