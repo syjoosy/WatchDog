@@ -109,7 +109,14 @@ def remove():
 	file.close
 
 def remove_all():
-	pass
+	name = txt1.get()
+	#extension = txt.get()
+	file = open(name, 'w')
+	txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
+	# for line in file:
+	# 	file.write(' ')
+	file.close
+
 
 # def newtype():
 # 	# name = input("Введите название категории: ")
