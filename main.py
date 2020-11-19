@@ -5,6 +5,7 @@ import time
 from watchdog.events import FileSystemEventHandler
 from tkinter import *
 
+
 window = Tk()
 window.title("WatchDog by syjoosy")
 window.geometry('800x800')
@@ -29,10 +30,6 @@ def new():
 		result = txt1.get()
 		txt.config(highlightbackground="black", highlightcolor="black")
 		res = txt.get()
-		# txt.delete(1.0, END)
-		# lbl.configure(text=res)
-		# expansion = input("Введите новое расширение: ")
-		# arr.append(expansion)
 		arr.append(res)
 		lbox.insert(END, res)
 		with open(result, "a") as myfile:
@@ -40,10 +37,8 @@ def new():
 
 		settings_file = open("settings.txt", 'r')
 		find = 0
-		# print("result: ", result)
 		for line in settings_file:
 			if line == result + "\n":
-				# print("Такая строка уже найдена")
 				find = 1
 				pass
 		if find == 0:
@@ -80,43 +75,27 @@ def remove():
 
 def remove_all():
 	name = txt1.get()
-	#extension = txt.get()
 	file = open(name, 'w')
 	txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
 	lbox.update()
 	lbox1.update()
-	# for line in file:
-	# 	file.write(' ')
 	file.close()
 
 
 def newtype():
-	# name = input("Введите название категории: ")
 	res = txt1.get()
-	# txt1.delete(1.0, END)
 	myFile = open(res, "a")
 	txt1.config(highlightbackground="lawn green", highlightcolor="lawn green")
-	# write(res)
-	# read(res)
 	myFile.close()
 
 def extension(line):
 	global kolvo
 	try:
-		# print("1")
 		myFile = open(line, 'r')
-		# print("2")
-		# dlina = len(myFile)
-		i = 0
 		for line_file in myFile:
-			# print("3")
-			# i+=1
-			# if i != dlina:
 			line_file = line_file[0:-1]
-			# arr.append(line_file)
 			arr.append(line_file)
 			print("Строка ", line_file, " добавлена")
-			# print(arr)
 	except BaseException:
 		print("Ошибка чтения файлов расширений")
 
@@ -138,7 +117,6 @@ filehandle.close()
 print("Весь файл успешно прочтен, строк: {}".format(i))
 
 
-# print(settings_line)
 for i in settings_line:
 	lbox1.insert(END,i)
 lbox1.place(x=200, y=40)
@@ -168,9 +146,6 @@ txt.place(x=280, y=285)
 btn = Button(window, text="Добавить", command=new)
 btn.place(x=380, y=280)
 
-# btn = Button(window, text="Добавить", command=new)
-# btn.place(x=380, y=280)
-
 btn = Button(window, text="Удалить", command=remove)
 btn.place(x=490, y=280)
 
@@ -183,9 +158,9 @@ text.place(x=280, y=325)
 btn = Button(window, text="Добавить", command=new)
 btn.place(x=380, y=320)
 
+
+
 # Создаем класс наследник, через него может отслеживать изменения в папках
-
-
 
 kolvo = 0
 class Handler(FileSystemEventHandler):
@@ -244,15 +219,17 @@ class Handler(FileSystemEventHandler):
 folder_track = '/home/syjoosy/Загрузки'
 # Папка куда перемещать будем
 folder_dest = '/home/syjoosy/Загрузки'
-# Handler.read(1)
+
+
+
 # Запуск всего на отслеживание
 handle = Handler()
 observer = Observer()
 observer.schedule(handle, folder_track, recursive=True)
 observer.start()
-# print("\n")
 print("Старт...")
 window.mainloop()
+
 # Программа 	будет срабатывать каждые 10 милисекунд
 lbox_restart = "lbox_restart"
 
